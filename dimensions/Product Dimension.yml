@@ -1,0 +1,75 @@
+unique_name: Product Dimension
+object_type: dimension
+label: Product Dimension
+type: standard
+
+hierarchies:
+
+  - unique_name: Product Dimension
+    label: Product Dimension
+    folder: Product Attributes
+    filter_empty: "yes"
+
+    levels:
+
+      - unique_name: I Category
+
+      - unique_name: Product Class
+
+      - unique_name: Product Brand
+
+      - unique_name: Product Dimension
+
+        secondary_attributes:
+
+          - unique_name: d_i_color
+            label: Product Color
+            folder: Product Attributes
+            dataset: item
+            name_column: I_COLOR
+            key_columns:
+              - I_COLOR
+            sort_column: I_COLOR
+
+          - unique_name: d_i_size
+            label: Product Size
+            folder: Product Attributes
+            dataset: item
+            name_column: I_SIZE
+            key_columns:
+              - I_SIZE
+            sort_column: I_SIZE
+
+level_attributes:
+
+  - unique_name: I Category
+    label: Product Category
+    dataset: item
+    name_column: I_CATEGORY
+    key_columns:
+      - I_CATEGORY
+
+  - unique_name: Product Brand
+    label: Product Brand
+    dataset: item
+    name_column: I_BRAND
+    key_columns:
+      - I_BRAND
+      - I_CATEGORY
+      - I_CLASS
+
+  - unique_name: Product Class
+    label: Product Class
+    dataset: item
+    name_column: I_CLASS
+    key_columns:
+      - I_CLASS
+      - I_CATEGORY
+
+  - unique_name: Product Dimension
+    label: Product Item
+    is_unique_key: true
+    dataset: item
+    name_column: I_ITEM_DESC
+    key_columns:
+      - I_ITEM_SK
