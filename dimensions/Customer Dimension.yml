@@ -1,0 +1,82 @@
+unique_name: Customer Dimension
+object_type: dimension
+label: Customer Dimension
+type: standard
+
+hierarchies:
+
+  - unique_name: Customer Dimension
+    label: Customer Dimension
+
+    levels:
+
+      - unique_name: Customer Country
+
+      - unique_name: Customer State
+
+      - unique_name: Customer County
+
+      - unique_name: Customer City
+
+      - unique_name: Customer Number
+
+        secondary_attributes:
+
+          - unique_name: Preferred Customer Ind
+            label: Preferred Customer Ind
+            folder: Customer Information
+            dataset: customer
+            name_column: C_PREFERRED_CUST_FLAG
+            key_columns:
+              - C_PREFERRED_CUST_FLAG
+            sort_column: C_PREFERRED_CUST_FLAG
+
+level_attributes:
+
+  - unique_name: Customer City
+    label: Customer City
+    dataset: customer_address
+    name_column: CA_CITY
+    key_columns:
+      - CA_ADDRESS_ID
+
+  - unique_name: Customer Country
+    label: Customer Country
+    dataset: customer_address
+    name_column: CA_COUNTRY
+    key_columns:
+      - CA_COUNTRY
+
+  - unique_name: Customer County
+    label: Customer County
+    dataset: customer_address
+    name_column: CA_COUNTY
+    key_columns:
+      - CA_COUNTY
+      - CA_COUNTRY
+      - CA_STATE
+
+  - unique_name: Customer Number
+    label: Customer Number
+    dataset: customer
+    name_column: C_CUSTOMER_SK
+    key_columns:
+      - C_CUSTOMER_SK
+
+  - unique_name: Customer State
+    label: Customer State
+    dataset: customer_address
+    name_column: CA_STATE
+    key_columns:
+      - CA_STATE
+      - CA_COUNTRY
+
+relationships:
+
+  - from:
+      dataset: customer
+      join_columns:
+        - C_CUSTOMER_ID
+    to:
+      level: Customer City
+    type: snowflake
